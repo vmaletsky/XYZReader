@@ -10,10 +10,11 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.app.SharedElementCallback;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +34,7 @@ import static com.example.xyzreader.ui.ArticleListActivity.EXTRA_STARTING_ID;
 /**
  * An activity representing a single Article detail screen, letting you swipe between articles.
  */
-public class ArticleDetailActivity extends ActionBarActivity
+public class ArticleDetailActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<Cursor> {
 
     public static final String ARG_POSITION = "position";
@@ -50,6 +51,7 @@ public class ArticleDetailActivity extends ActionBarActivity
     private View mUpButtonContainer;
     private View mUpButton;
 
+    private CoordinatorLayout mCoordinatorLayout;
     private int mCurPosition;
 
     private ArticleDetailFragment mCurrentDetailsFragment;
@@ -88,6 +90,8 @@ public class ArticleDetailActivity extends ActionBarActivity
                             View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
         }
         setContentView(R.layout.activity_article_detail);
+
+        mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.details_coord_layout);
 
         getLoaderManager().initLoader(0, null, this);
         postponeEnterTransition();
